@@ -55,11 +55,15 @@ exports['given a heartbeat'] = {
 
   'can remove a callback': function(done) {
     var foo = function() {},
+        bar = function() {},
         hb = this.hb;
     hb.add(foo);
-    assert.ok(hb._actions.some(function(cb) { return cb == foo }), 'cb is in actions');
+    hb.add(bar);
+    assert.ok(hb._actions.some(function(cb) { return cb == foo }), 'foo is in actions');
+    assert.ok(hb._actions.some(function(cb) { return cb == bar }), 'bar is in actions');
     hb.remove(foo);
-    assert.ok(!hb._actions.some(function(cb) { return cb == foo }), 'cb is not in actions');
+    assert.ok(!hb._actions.some(function(cb) { return cb == foo }), 'foo is not in actions');
+    assert.ok(hb._actions.some(function(cb) { return cb == bar }), 'bar is in actions');
     done();
   },
 

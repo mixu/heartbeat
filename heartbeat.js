@@ -33,7 +33,7 @@ Heartbeat.prototype.add = function(callback) {
 Heartbeat.prototype.remove = function(callback) {
   var i = this._actions.length-1;
   while(i >= 0) {
-    if(this._actions[i] == callback) {
+    if(this._actions[i] === callback) {
       this._actions.splice(i, 1);
     }
     i--;
