@@ -1,0 +1,13 @@
+{
+  "name": "heartbeat",
+  "description": "Combine multiple recurring timers to a single interval",
+  "version": "0.0.1",
+  "main": "heartbeat.js",
+  "devDependencies": {
+    "mocha": "*"
+  },
+  "private": true,
+  "scripts": {
+    "test": "make test"
+  }
+}
