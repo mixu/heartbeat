@@ -15,7 +15,7 @@ Heartbeat.prototype.nextTimeout = function(millis) {
     this.pause();
   }
   var self = this;
-  this._loop = setTimeout(function() { Heartbeat.prototype._runActions(self._actions);}, millis);
+  this._loop = setTimeout(function() { Heartbeat.prototype._runActions(self);}, millis);
   return this;
 };
 
@@ -25,7 +25,7 @@ Heartbeat.prototype.start = Heartbeat.prototype.resume = function() {
     return this;
   }
   var self = this;
-  this._loop = setTimeout(function() { Heartbeat.prototype._runActions(self._actions);}, this._interval);
+  this._loop = setTimeout(function() { Heartbeat.prototype._runActions(self);}, this._interval);
   return this;
 };
 
@@ -60,15 +60,16 @@ Heartbeat.prototype.isActive = function() {
   return !!this._loop;
 };
 
-Heartbeat.prototype._runActions = function(actions) {
-  var len = actions.length, i = 0;
+Heartbeat.prototype._runActions = function(self) {
+  var len = self._actions.length, i = 0;
   while(i < len) {
     actions[i]();
     i++;
   }
+  console.log('_runActions done');
   // using setTimeout, since it is safer and easier to control
   // - only set the next interval once all actions have run
-  setTimeout(Heartbeat.prototype._runActions, this._interval);
+  self._loop = setTimeout(function() { Heartbeat.prototype._runActions(self);}, self._interval);
 };
 
 module.exports = Heartbeat;
