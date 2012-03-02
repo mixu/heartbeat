@@ -66,7 +66,6 @@ Heartbeat.prototype._runActions = function(self) {
     self._actions[i]();
     i++;
   }
-  console.log('_runActions done');
   // using setTimeout, since it is safer and easier to control
   // - only set the next interval once all actions have run
   self._loop = setTimeout(function() { Heartbeat.prototype._runActions(self);}, self._interval);
