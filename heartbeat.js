@@ -15,7 +15,7 @@ Heartbeat.prototype.nextTimeout = function(millis) {
     this.pause();
   }
   var self = this;
-  this._loop = setTimeout(function() { Heartbeat.prototype._runActions(self);}, millis);
+  this._loop = setTimeout(function() { Heartbeat.prototype._runActions(self); }, millis);
   return this;
 };
 
@@ -25,7 +25,7 @@ Heartbeat.prototype.start = Heartbeat.prototype.resume = function() {
     return this;
   }
   var self = this;
-  this._loop = setTimeout(function() { Heartbeat.prototype._runActions(self);}, this._interval);
+  this._loop = setTimeout(function() { Heartbeat.prototype._runActions(self); }, this._interval);
   return this;
 };
 
@@ -63,7 +63,7 @@ Heartbeat.prototype.isActive = function() {
 Heartbeat.prototype._runActions = function(self) {
   var len = self._actions.length, i = 0;
   while(i < len) {
-    actions[i]();
+    self._actions[i]();
     i++;
   }
   console.log('_runActions done');
