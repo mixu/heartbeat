@@ -1,5 +1,5 @@
 // Use a single heartbeat object that can be explicitly cleared when running tests
-var Heartbeat = function() {
+function Heartbeat() {
   this._actions = [];
   this._loop = false;
   this._interval = 60 * 1000;
@@ -61,10 +61,9 @@ Heartbeat.prototype.isActive = function() {
 };
 
 Heartbeat.prototype._runActions = function(self) {
-  var len = self._actions.length, i = 0;
-  while(i < len) {
-    self._actions[i]();
-    i++;
+  var i, len = self._actions.length;
+  for(i = 0; i < len; i++) {
+    self._actions[i] && self._actions[i]();
   }
   // using setTimeout, since it is safer and easier to control
   // - only set the next interval once all actions have run
